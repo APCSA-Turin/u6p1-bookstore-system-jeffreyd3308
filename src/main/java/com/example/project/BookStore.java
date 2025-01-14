@@ -3,26 +3,83 @@ package com.example.project;
 public class BookStore{
 
     //requires at least 2 attributes Book[] books, User[] users (initialized to an empty array of 10 max users) 
+    private Book[] books = new Book[5];
+    private User[] users = new User[10];
 
     //requires 1 empty constructor
+    public BookStore() {}
 
-    // public getUsers(){}
+    //getter methods to get the attributes
+    public User[] getUsers() {
+        return users;
+    }
 
-    // public setUsers(){}
+    public Book[] getBooks() {
+        return books;
+    }
 
-    // public  getBooks(){}
+    //setter methods to set the attributes
+    public void setUsers(User[] newUsers) {
+        users = newUsers;
+    }
 
-    // public void addUser(User user){} 
+    // adds an user to the first empty user index
+    public void addUser(User user) {
+        for (int i = 0; i < users.length; i++) {
+            if (users[i] == null) {
+                users[i] = user;
+                break;
+            }
+        }
+    }
 
-    // public void removeUser(User user){}
+    //removes a specified user from the list
+    public void removeUser(User user) {
+        for (int i = 0; i < users.length; i++) {
+            if (users[i] == user) {
+                users[i] = null;
+            }
+        }
+    }
 
-    // public void consolidateUsers(){}
+    //moves every non empty user element to the front
+    public void consolidateUsers() {
+        int firstNull = 0;
+        for (int i = 0; i < users.length; i++) {
+            if (users[i] == null && firstNull == 0) {
+                firstNull = i;
+            }
+            if (users[i] != null && firstNull != 0) {
+                users[firstNull] = users[i];
+                users[i] = null;
+                firstNull++;
+            }
+        }
+    }
 
-    // public void addBook(Book book){}
+    // adds a book to the first empty book index
+    public void addBook(Book book) {
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] == null) {
+                books[i] = book;
+                break;
+            }
+        }
+    }
 
-    // public void insertBook(Book book, int index){}
+    // inserts a book to a specified index
+    public void insertBook(Book book, int index) {
+        books[index] = book;
+    }
 
-    // public void removeBook(Book book){}
+    //removes a specified book from the list
+    public void removeBook(Book book) {
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] == book) {
+                books[i] = null;
+            }
+        }
+    }
        
     // public String bookStoreBookInfo(){} //you are not tested on this method but use it for debugging purposes
 
