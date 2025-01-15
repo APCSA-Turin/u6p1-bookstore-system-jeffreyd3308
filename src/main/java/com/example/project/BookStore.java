@@ -40,6 +40,7 @@ public class BookStore{
                 users[i] = null;
             }
         }
+        consolidateUsers();
     }
 
     //moves every non empty user element to the front
@@ -49,7 +50,7 @@ public class BookStore{
             if (users[i] == null && firstNull == 0) {
                 firstNull = i;
             }
-            if (users[i] != null && firstNull != 0) {
+            if (users[i] != null && i != 0) {
                 users[firstNull] = users[i];
                 users[i] = null;
                 firstNull++;
@@ -69,14 +70,36 @@ public class BookStore{
 
     // inserts a book to a specified index
     public void insertBook(Book book, int index) {
-        books[index] = book;
+        if (books[index] != null) {
+            for (int i = index; i < books.length - 1; i++) {
+                books[i + 1] = books[i];
+            }
+            books[index] = book;
+        } else {
+            books[index] = book;
+        }
+        
     }
 
     //removes a specified book from the list
     public void removeBook(Book book) {
         for (int i = 0; i < books.length; i++) {
             if (books[i] == book) {
-                books[i] = null;
+                if (books[i].getQuantity() > 0) {
+                    books[i].setQuantity(books[i].getQuantity() - 1);
+                } 
+                if (books[i].getQuantity() <= 0) {
+                    books[i] = null;
+                    Book[] temp = new Book[books.length - 1];
+                    int index = 0;
+                    for (int j = 0; j < books.length; j++) {
+                        if (books[j] != null) {
+                            temp[index] = books[j];
+                            index++;
+                        }
+                    }
+                    books = temp;
+                }
             }
         }
     }
