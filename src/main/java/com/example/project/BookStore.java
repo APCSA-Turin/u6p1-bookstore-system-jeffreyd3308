@@ -103,9 +103,22 @@ public class BookStore{
             }
         }
     }
-       
-    // public String bookStoreBookInfo(){} //you are not tested on this method but use it for debugging purposes
 
-    // public String bookStoreUserInfo(){} //you are not tested on this method but use it for debugging purposes
+    //returns the info of all the books
+    public String bookStoreBookInfo() {
+        String str = "";
+        for (Book book : books) {
+            str += book.bookInfo() + "\n";
+        }
+        return str;
+    }
 
+    //returns the info of all users
+    public String bookStoreUserInfo() {
+        String str = "";
+        for (User user : users) {
+            str += user.userInfo() + "\n";
+        }
+        return str;
+    }
 }
